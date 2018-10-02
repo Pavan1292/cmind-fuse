@@ -1,0 +1,61 @@
+
+ <div fxLayout="column" fxLayoutAlign="start"
+ fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+    <div class="widget" fxFlex="100" fxFlex.gt-sm="33" *ngFor = "let card of cards">
+        <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                <div class="pr-16">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Document Name</mat-card-title>
+                            <mat-card-subtitle>Document Short Note</mat-card-subtitle>
+                          </mat-card-header>
+                          <img mat-card-image src="http://www.acqueon.com/wp-content/uploads/2017/08/avatar-image.png" alt="Photo of a Shiba Inu">
+                          <mat-card-content>
+                            <table>
+                                <tr>Name     : Harathi, Pavankumar</tr> 
+                                <tr>DOJ      : 04/16/2018</tr>
+                                <tr>Location : Dallas</tr>
+                            </table>
+                            </mat-card-content>
+                          <mat-card-actions>
+                              <button mat-raised-button color="primary">LIKE</button>
+                              <button mat-raised-button color="warn">DELETE</button>
+                          </mat-card-actions>
+                    </mat-card>   
+                  
+                  </div>
+                    </div>
+
+        </div>
+    </div>
+    <!-- <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
+        <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                <div class="pr-16">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Shiba Inu</mat-card-title>
+                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                          </mat-card-header>
+                          <img mat-card-image src="http://www.acqueon.com/wp-content/uploads/2017/08/avatar-image.png" alt="Photo of a Shiba Inu">
+                          <mat-card-content>
+                            <p>
+                              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                              bred for hunting.
+                            </p>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <button mat-button>LIKE</button>
+                            <button mat-button>SHARE</button>
+                          </mat-card-actions>
+                    </mat-card>                  </div>
+                  </div>
+        </div>
+      </div> -->
+ </div>

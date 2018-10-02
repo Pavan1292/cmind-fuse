@@ -8,12 +8,12 @@ export const navigation: FuseNavigation[] = [
         type     : 'group',
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
+                id       : 'dashboard',
+                title    : 'Dashboard',
                 translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
-                icon     : 'email',
-                url      : '/sample'
+                icon     : 'dashboard',
+                url      : '/dashboard'
                
             },
             {

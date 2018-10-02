@@ -19,11 +19,13 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { RegisterModule } from './main/register/register.module';
 import { LoginModule } from './main/login/login.module';
+import {DashboardModule} from './main/dashboard/dashboard.module';
+
 
 const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'sample'
+        redirectTo: 'dashboard'
     },
     {
         path      : 'settings',
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+        
         
         
     ],
@@ -63,7 +66,8 @@ const appRoutes: Routes = [
         LayoutModule,
         SampleModule,
         RegisterModule,
-        LoginModule
+        LoginModule,
+        DashboardModule
     ],
     bootstrap   : [
         AppComponent
