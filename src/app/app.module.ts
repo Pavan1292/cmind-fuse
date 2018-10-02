@@ -17,6 +17,8 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
+import { RegisterModule } from './main/register/register.module';
+import { LoginModule } from './main/login/login.module';
 
 const appRoutes: Routes = [
     {
@@ -31,7 +33,9 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        
+        
     ],
     imports     : [
         BrowserModule,
@@ -57,7 +61,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        SampleModule,
+        RegisterModule,
+        LoginModule
     ],
     bootstrap   : [
         AppComponent
