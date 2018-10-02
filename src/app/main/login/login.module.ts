@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
-import { FuseSharedModule } from '@fuse/shared.module'
+import { FuseSharedModule } from '@fuse/shared.module';
 import { LoginComponent } from './login.component';
 
 
@@ -20,15 +20,14 @@ const routes = [
     imports     : [
         RouterModule.forChild(routes),
 
-        TranslateModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
 
         FuseSharedModule
-    ],
-    exports     : [
-        LoginComponent
     ]
 })
-
 export class LoginModule
 {
 }
