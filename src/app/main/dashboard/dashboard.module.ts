@@ -4,6 +4,8 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { DashboardComponent } from './dashboard.component';
+import {CategoryServices} from './Categories.Services';
+import {AuthenticationService} from '../login/Authentication.Service'
 
 
 const routes = [
@@ -27,7 +29,9 @@ const routes = [
         MatCardModule,
 
         FuseSharedModule
-    ]
+    ],
+
+    providers: [CategoryServices, AuthenticationService]
 })
 export class DashboardModule
 {

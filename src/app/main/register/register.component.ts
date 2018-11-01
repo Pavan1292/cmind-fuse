@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/internal/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import {InvitationServices} from './Invitation.Services';
 
 @Component({
     selector     : 'register',
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit, OnDestroy
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _iSerices: InvitationServices
     )
     {
         // Configure the layout
@@ -57,19 +59,21 @@ export class RegisterComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         this.registerForm = this._formBuilder.group({
-            name           : ['', Validators.required],
             email          : ['', [Validators.required, Validators.email]],
             password       : ['', Validators.required],
-            passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
+            passwordConfirm: ['', [Validators.required]],
+            firstname       : ['', Validators.required],
+            lastname           : ['', Validators.required],
+            userid         : ['', Validators.required]
         });
 
         // Update the validity of the 'passwordConfirm' field
         // when the 'password' field changes
-        this.registerForm.get('password').valueChanges
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(() => {
-                this.registerForm.get('passwordConfirm').updateValueAndValidity();
-            });
+        // this.registerForm.get('password').valueChanges
+        //     .pipe(takeUntil(this._unsubscribeAll))
+        //     .subscribe(() => {
+        //         this.registerForm.get('passwordConfirm').updateValueAndValidity();
+        //     });
     }
 
     /**
@@ -80,6 +84,16 @@ export class RegisterComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
+    }
+
+    // tslint:disable-next-line:typedef
+    submitDetails(){
+        console.log('From Register Compoenets TS');
+        this._iSerices.submitDetails(this.registerForm.value);
+        /* this._iSerices.submitDetails(this.registerForm.value).subscribe(response=>{
+            console.log(response)
+        }) */
+        
     }
 }
 

@@ -4,6 +4,7 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule 
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { RegisterComponent } from './register.component';
+import { InvitationServices} from './Invitation.Services';
 
 
 const routes = [
@@ -26,7 +27,9 @@ const routes = [
         MatInputModule,
 
         FuseSharedModule
-    ]
+    ],
+    
+    providers: [InvitationServices]
 })
 export class RegisterModule
 {

@@ -1,8 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
+import { AuthenticationService } from './Authentication.Service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
     selector     : 'login',
@@ -23,7 +28,9 @@ export class LoginComponent implements OnInit
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private authService: AuthenticationService,
+        private router: Router
     )
     {
         // Configure the layout
@@ -45,6 +52,7 @@ export class LoginComponent implements OnInit
         };
     }
 
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -55,8 +63,22 @@ export class LoginComponent implements OnInit
     ngOnInit(): void
     {
         this.loginForm = this._formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
+            email   : [''],
+            password: ['']
         });
     }
+
+    // tslint:disable-next-line:typedef
+    login (){
+        console.log(this.loginForm);
+        this.authService.Login(this.loginForm.value).subscribe(resposne => {
+            console.log(resposne);
+            localStorage.setItem('currentsession', JSON.stringify(resposne));
+            this.router.navigate(['dashboard']);
+        });
+        
+    }
+
+    
 }
+

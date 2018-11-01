@@ -17,6 +17,15 @@ export const navigation: FuseNavigation[] = [
                
             },
             {
+                id       : 'documents',
+                title    : 'Documents',
+                // translate: 'NAV.SAMPLE.TITLE',
+                type     : 'item',
+                icon     : 'documents',
+                url      : '/documents'
+               
+            },
+            {
                 id       : 'settings',
                 title    : 'Settings',
                 // translate: 'NAV.SAMPLE.TITLE',
@@ -24,7 +33,16 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'settings',
                 url      : '/settings'
                
-            }
+            },
+            {
+                id       : 'Connections',
+                title    : 'Connections',
+                translate: 'NAV.SAMPLE.TITLE',
+                type     : 'item',
+                icon     : 'contacts',
+                url      : '/dashboard'
+               
+            },
         ]
     }
 ];

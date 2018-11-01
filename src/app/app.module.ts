@@ -19,26 +19,48 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import { RegisterModule } from './main/register/register.module';
 import { LoginModule } from './main/login/login.module';
-import {DashboardModule} from './main/dashboard/dashboard.module';
+import { DashboardModule } from './main/dashboard/dashboard.module';
+import { ForgotPasswordModule } from './main/forgot-password/forgot-pasword.module';
+import { ConnectionsComponent } from './main/connections/connections.component';
+
 
 
 const appRoutes: Routes = [
+
     {
         path      : '**',
+        redirectTo: 'login'
+    },
+
+    {
+        path      : 'dashboard',
         redirectTo: 'dashboard'
+    },
+    {
+        path      : 'register',
+        redirectTo: 'register'
+
     },
     {
         path      : 'settings',
         redirectTo: 'sample'
+    },
+    {
+        path       : 'forgot-password',
+        redirectTo : 'forgot-password'
+    },
+    {
+        path       : 'connections',
+        redirectTo : 'connections'
     }
+
+   
 ];
 
 @NgModule({
     declarations: [
         AppComponent,
-        
-        
-        
+        ConnectionsComponent,      
     ],
     imports     : [
         BrowserModule,
@@ -67,7 +89,8 @@ const appRoutes: Routes = [
         SampleModule,
         RegisterModule,
         LoginModule,
-        DashboardModule
+        DashboardModule,
+        ForgotPasswordModule
     ],
     bootstrap   : [
         AppComponent

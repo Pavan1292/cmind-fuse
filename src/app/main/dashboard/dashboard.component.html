@@ -4,7 +4,6 @@
     <div class="widget" fxFlex="100" fxFlex.gt-sm="33" *ngFor = "let card of cards">
         <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
             <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-
                 <div class="pr-16">
                     <mat-card class="example-card">
                         <mat-card-header>
@@ -14,10 +13,10 @@
                           </mat-card-header>
                           <img mat-card-image src="http://www.acqueon.com/wp-content/uploads/2017/08/avatar-image.png" alt="Photo of a Shiba Inu">
                           <mat-card-content>
-                            <table>
-                                <tr>Name     : Harathi, Pavankumar</tr> 
-                                <tr>DOJ      : 04/16/2018</tr>
-                                <tr>Location : Dallas</tr>
+                            ~<table>
+                                <tr>Name     : {{card.Name}}</tr> 
+                                <tr>Description : {{card.Description}}</tr>
+                                <tr>Hierarchy : {{card.Hierarchy}}</tr>
                             </table>
                             </mat-card-content>
                           <mat-card-actions>
