@@ -7,22 +7,20 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import 'hammerjs';
-
 import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
-
 import { fuseConfig } from 'app/fuse-config';
-
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { RegisterModule } from './main/register/register.module';
 import { LoginModule } from './main/login/login.module';
 import { DashboardModule } from './main/dashboard/dashboard.module';
 import { ForgotPasswordModule } from './main/forgot-password/forgot-pasword.module';
-import { ConnectionsComponent } from './main/connections/connections.component';
+import { DocumentsModule } from './main/documents/documents.module';
+import { ConnectionsModule } from './main/connections/connections.module';
 
+/* Add newly added components routes here */
 
 
 const appRoutes: Routes = [
@@ -36,6 +34,7 @@ const appRoutes: Routes = [
         path      : 'dashboard',
         redirectTo: 'dashboard'
     },
+
     {
         path      : 'register',
         redirectTo: 'register'
@@ -43,24 +42,28 @@ const appRoutes: Routes = [
     },
     {
         path      : 'settings',
-        redirectTo: 'sample'
+        redirectTo: 'dashboard'
     },
     {
         path       : 'forgot-password',
         redirectTo : 'forgot-password'
     },
-    {
-        path       : 'connections',
-        redirectTo : 'connections'
-    }
 
+    {
+        path      : 'documents',
+        redirectTo: 'documents'
+    },
+    {
+        path      : 'connections',
+        redirectTo: 'connections' 
+    }   
    
 ];
 
 @NgModule({
     declarations: [
         AppComponent,
-        ConnectionsComponent,      
+       
     ],
     imports     : [
         BrowserModule,
@@ -86,11 +89,12 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule,
         RegisterModule,
         LoginModule,
+        ForgotPasswordModule,
         DashboardModule,
-        ForgotPasswordModule
+        DocumentsModule,
+        ConnectionsModule       
     ],
     bootstrap   : [
         AppComponent

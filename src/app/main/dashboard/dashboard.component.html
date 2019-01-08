@@ -1,60 +1,48 @@
 
- <div fxLayout="column" fxLayoutAlign="start"
- fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
-    <div class="widget" fxFlex="100" fxFlex.gt-sm="33" *ngFor = "let card of cards">
-        <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
-            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-                <div class="pr-16">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>Document Name</mat-card-title>
-                            <mat-card-subtitle>Document Short Note</mat-card-subtitle>
-                          </mat-card-header>
-                          <img mat-card-image src="http://www.acqueon.com/wp-content/uploads/2017/08/avatar-image.png" alt="Photo of a Shiba Inu">
-                          <mat-card-content>
-                            ~<table>
-                                <tr>Name     : {{card.Name}}</tr> 
-                                <tr>Description : {{card.Description}}</tr>
-                                <tr>Hierarchy : {{card.Hierarchy}}</tr>
-                            </table>
-                            </mat-card-content>
-                          <mat-card-actions>
-                              <button mat-raised-button color="primary">LIKE</button>
-                              <button mat-raised-button color="warn">DELETE</button>
-                          </mat-card-actions>
-                    </mat-card>   
-                  
-                  </div>
-                    </div>
-
-        </div>
-    </div>
-    <!-- <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
-        <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
-            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-
-                <div class="pr-16">
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>Shiba Inu</mat-card-title>
-                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                          </mat-card-header>
-                          <img mat-card-image src="http://www.acqueon.com/wp-content/uploads/2017/08/avatar-image.png" alt="Photo of a Shiba Inu">
-                          <mat-card-content>
-                            <p>
-                              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                              bred for hunting.
-                            </p>
-                          </mat-card-content>
-                          <mat-card-actions>
-                            <button mat-button>LIKE</button>
-                            <button mat-button>SHARE</button>
-                          </mat-card-actions>
-                    </mat-card>                  </div>
-                  </div>
-        </div>
-      </div> -->
+ <div id="category">
+    <i class="material-icons addCategory"  (click)="openCatergory()">create_new_folder</i>
  </div>
+ <div fxLayout="column" fxLayoutAlign="start" class="dashBoard"
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start" *ngIf="cards">
+    <div class="widget" fxFlex="100" fxFlex.gt-sm="25" *ngFor = "let card of cards.Cards">
+     
+        <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+            <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+                <div class="pr-16">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>{{card.Name}}</mat-card-title>
+                            <mat-card-subtitle>{{card.CategoryDescription}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <button mat-raised-button color="primary" (click)="card.isOpen=!card.isOpen">
+                            <span *ngIf="!card.isOpen">Show Documents</span>
+                            <span *ngIf="card.isOpen">Hide Documents</span>
+                        </button>
+                        <img mat-card-image src="https://cdn2.iconfinder.com/data/icons/social-media-8/512/note3.png" alt="Photo of a Shiba Inu">
+                       <ng-container *ngIf="card.Tiles">
+                        <mat-card-content *ngIf="card.isOpen">
+                            <ng-container *ngFor="let tile of card.Tiles" >
+                                <i class="material-icons" (click)="showDocDetails(tile)">
+                                        folder
+                                </i>
+                            </ng-container>
+                        </mat-card-content>
+                       </ng-container>
+                        <mat-card-actions>
+                            <table>
+                                <hr>
+                                <tr>
+                                    <i class="material-icons"  (click)="openUpload()">cloud_upload</i>
+                                    <i class="material-icons"  (click)="openCatergory()">create_new_folder</i>
+                                    <!-- <i class="material-icons"  (click)="goToList()">list</i> -->
+                                    <i class="material-icons"  [routerLink]= "['../documents']">list</i>
+                                </tr>
+                            </table>
+                        </mat-card-actions>                             
+                    </mat-card>                   
+                  </div>
+                </div>
+            </div>
+        </div>
+</div>

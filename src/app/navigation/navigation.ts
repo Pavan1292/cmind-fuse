@@ -16,33 +16,49 @@ export const navigation: FuseNavigation[] = [
                 url      : '/dashboard'
                
             },
+            
+          
             {
                 id       : 'documents',
                 title    : 'Documents',
-                // translate: 'NAV.SAMPLE.TITLE',
+                translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
-                icon     : 'documents',
+                icon     : 'bookmark',
                 url      : '/documents'
+               
+            },
+
+            {
+                id       : 'conections',
+                title    : 'Connections',
+                translate: 'NAV.SAMPLE.TITLE',
+                type     : 'item',
+                icon     : 'link',
+                url      : '/connections'
+               
+            },
+            {
+                id       : 'categories',
+                title    : 'Categories',
+                translate: 'NAV.SAMPLE.TITLE',
+                type     : 'item',
+                icon     : 'category',
+                url      : '/categories'
                
             },
             {
                 id       : 'settings',
                 title    : 'Settings',
-                // translate: 'NAV.SAMPLE.TITLE',
+                translate: 'NAV.SAMPLE.TITLE',
                 type     : 'item',
                 icon     : 'settings',
                 url      : '/settings'
                
             },
-            {
-                id       : 'Connections',
-                title    : 'Connections',
-                translate: 'NAV.SAMPLE.TITLE',
-                type     : 'item',
-                icon     : 'contacts',
-                url      : '/dashboard'
-               
-            },
+            
+
+            
+            
         ]
     }
 ];

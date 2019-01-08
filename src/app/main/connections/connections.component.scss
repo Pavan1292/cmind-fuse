@@ -1,0 +1,22 @@
+
+    .mat-card>.mat-card-actions:last-child {
+        text-align: right;
+    }
+    table {
+        width: 100%;
+      }
+      app-documents {
+        flex-direction: column;
+    }
+    .connections {
+      width: 98%;
+      margin: 2%;
+    }
+    .loading {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        position: absolute;
+        left: 500px;
+        top: 200px;
+        }

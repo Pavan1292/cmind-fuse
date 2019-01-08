@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {CategoryServices} from './Categories.Services';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FileUploader } from 'ng2-file-upload';
+import { Router } from '@angular/router';
+import { DocumentService } from '../documents/documents.service';
+const URL = 'http://localhost:3000/api/upload';
+ 
 
 @Component({
   selector: 'app-dashboard',
@@ -8,83 +14,206 @@ import {CategoryServices} from './Categories.Services';
 })
 export class DashboardComponent implements OnInit {
   cards ;
-  constructor(private categoryservice: CategoryServices) { 
+  currentsession = JSON.parse(localStorage.getItem('currentsession'));
+  router: any;
+
+  constructor(private categoryservice: CategoryServices, private documentservice: DocumentService,
+    public dialog: MatDialog) { 
     
   }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.loadMainCategories();  
-    // this.IsCategoryDisplay = true;
-    // this.IsCategoryEdit = false;
-    // tslint:disable-next-line:no-shadowed-variable
-    // const cards: cards = {
-    //     label: 'Categories',           
-    //     CategoryID: 0
-
-    // };
-    // this.cards.push(cards);
+    this.getCardsDetails();
 
   }
 
   // tslint:disable-next-line:typedef
   loadMainCategories(){
-    console.log('hi ');
-    const currentsession = JSON.parse(localStorage.getItem('currentsession'));
-    this.categoryservice.getCategories(currentsession.Token).subscribe(response => {
+    this.categoryservice.getCategories(this.currentsession.Token).subscribe(response => {
       console.log(response);
-      this.cards = response;
+     
     });
 
   }
 
   // tslint:disable-next-line:typedef
-  // getMainCategories(){
-  //   console.log('Hi ! from get cards');
-  //   this.categoryservice.getCategories(currentsession, id);
+  getCardsDetails(){
+    this.categoryservice.getCards(this.currentsession.Token).subscribe(response => {
+      console.log(response);
+      this.cards = response;
+      this.cards.Cards.forEach(element => {
+        element['isOpen'] = false ;
+        console.log(element);
+      });
+    });
+  }
+
+  /********************************************************************************** */
+
+  // tslint:disable-next-line:typedef
+  openUpload(){
+    const dialogRef = this.dialog.open(UploadModal);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+ 
+  }
+
+
+
+
+
+
+  /******************************************************************************* */
+
+  // tslint:disable-next-line:typedef
+  openCatergory(){
+    const dialogRef = this.dialog.open(CategoryModal);
+  }
+ 
+  // tslint:disable-next-line:typedef
+  showDocDetails(card){
+    console.log(card);
+    localStorage.setItem('docDetails', JSON.stringify(card));
+    const dialogRef = this.dialog.open(DocDetailsModal);
+  }
+
+  goToList(){
+    console.log('in goto');
+    // this.router.navigate(['/documents']);
+  }
     
 }
 
+@Component({
+  templateUrl: 'documents-modal-dialog.html',
+  styleUrls: ['./dashboard.component.scss']
+})
 
+// tslint:disable-next-line:component-class-suffix
+export class DocDetailsModal implements OnInit{
+  doc;
+  id: any;
+  
+  currentsession = JSON.parse(localStorage.getItem('currentsession'));
+ constructor(public dialogRef: MatDialogRef<DocDetailsModal>,
+    @Inject(MAT_DIALOG_DATA) public data,
+    public dialog: MatDialog,
+    private documentservice: DocumentService){
 
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  closeNow(){
+    console.log('closeNow closed');
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  search(){
+    console.log('search called');
+  }
+  // tslint:disable-next-line:typedef
+  shareDocument(){
+    console.log('shareDocument is called');
+    // const dialogRef = this.dialog.open(CategoryModal);
 
-// const cards = [
-//   { name : 'Driving Licence',
-//     expiry : 10 - 27 - 2018,
-//     details : 'Details About Document'},
-//     { name : 'Driving Licence',
-//     expiry : 10 - 27 - 2018,
-//     details : 'Details About Document'},
-//     { name : 'Driving Licence',
-//     expiry : 10 - 27 - 2018,
-//     details : 'Details About Document'},
-//     { name : 'Driving Licence',
-//     expiry : 10 - 27 - 2018,
-//     details : 'Details About Document'}
-// ];
+  }
+  // tslint:disable-next-line:typedef
+  editDocument(){
+    console.log('editDocument is called');
+    const dialogRef = this.dialog.open(CategoryModal);
 
+  }
 
-// loadMainCategories()
-//     {
-//         var CurrentSession = JSON.parse(localStorage.getItem("currentsession"));
-//         this.CurrentUser=CurrentSession.User.UserName;
-//         this.CategoryServices.getCards(CurrentSession.Token,0).subscribe(
-//             CategoryModel => {
-                
-//                 this.CategoryModel = CategoryModel;
-//                 console.log(this.CategoryModel);
-//                 this.CategoryCard = this.CategoryModel.Cards;               
-//                 this.assignScripts();
+  /*********************************************************************** */
+  // tslint:disable-next-line:typedef
+  deleteDocument(Document){
+    alert('Are you sure , You want to delete this Document?');
+    this.documentservice.deleteDocument(Document.documentID, this.currentsession.Token);
+  }
+  documentID(documentID: any, Token: any): any {
+    throw new Error('Method not implemented.');
+  }
 
-//             },
-//             (error) => {
-//                 if (error == 504)
-//                 {
-//                     alert('Session Time Out');
-//                     this.AuthenticationService.Logout();
-//                 }
-//             }
+  /******************************************************************************* */
+  // tslint:disable-next-line:typedef
+  list(){
+    // const dialogRef = this.dialog.open(CategoryModal);
 
-//         );
-       
-//     }
+  }
+
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
+    this.doc = JSON.parse(localStorage.getItem('docDetails'));
+  }
+
+}
+
+@Component({
+  templateUrl: 'category-modal-dialog.html',
+  styleUrls: ['./dashboard.component.scss']
+})
+
+// tslint:disable-next-line:component-class-suffix
+export class CategoryModal implements OnInit {
+ constructor(public dialogRef: MatDialogRef<CategoryModal>,
+    @Inject(MAT_DIALOG_DATA) public data){
+
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  closeNow(){
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
+ 
+  }
+
+}
+
+@Component({
+  templateUrl: 'upload-modal-dialog.html',
+  styleUrls: ['./dashboard.component.scss']
+})
+
+// tslint:disable-next-line:component-class-suffix
+export class UploadModal implements OnInit {
+
+  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+
+  constructor(public dialogRef: MatDialogRef<UploadModal>,
+    @Inject(MAT_DIALOG_DATA) public data){
+
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  closeNow(){
+    this.dialogRef.close();
+  }
+  // tslint:disable-next-line:typedef
+  uploadFile(){
+    // this.uploader.uploadAll()
+
+  }
+  // tslint:disable-next-line:typedef
+  ngOnInit(){
+    this.uploader.onAfterAddingFile = (file) => { 
+      file.withCredentials = false;
+      console.log(file);
+    };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('ImageUpload:uploaded:', item, status, response);
+      alert('File uploaded successfully');
+  };
+  }
+
+}

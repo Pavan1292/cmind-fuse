@@ -1,0 +1,12 @@
+<form class="example-form">
+    <input type="file" name="photo" ng2FileSelect [uploader]="uploader" />
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="File Name .." [(ngModel)]="fineNmae">
+
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="uploadFile()" [disabled]="!uploader.getNotUploadedItems().length" >Upload</button>
+    <button mat-raised-button color="warn" (click)="closeNow()">OK</button>
+
+  </form>

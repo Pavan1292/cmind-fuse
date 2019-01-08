@@ -67,13 +67,7 @@ export class RegisterComponent implements OnInit, OnDestroy
             userid         : ['', Validators.required]
         });
 
-        // Update the validity of the 'passwordConfirm' field
-        // when the 'password' field changes
-        // this.registerForm.get('password').valueChanges
-        //     .pipe(takeUntil(this._unsubscribeAll))
-        //     .subscribe(() => {
-        //         this.registerForm.get('passwordConfirm').updateValueAndValidity();
-        //     });
+   
     }
 
     /**
@@ -90,10 +84,7 @@ export class RegisterComponent implements OnInit, OnDestroy
     submitDetails(){
         console.log('From Register Compoenets TS');
         this._iSerices.submitDetails(this.registerForm.value);
-        /* this._iSerices.submitDetails(this.registerForm.value).subscribe(response=>{
-            console.log(response)
-        }) */
-        
+       
     }
 }
 
