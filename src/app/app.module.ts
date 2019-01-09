@@ -19,6 +19,7 @@ import { DashboardModule } from './main/dashboard/dashboard.module';
 import { ForgotPasswordModule } from './main/forgot-password/forgot-pasword.module';
 import { DocumentsModule } from './main/documents/documents.module';
 import { ConnectionsModule } from './main/connections/connections.module';
+import { CategoriesModule } from './main/categories/categories.module';
 
 /* Add newly added components routes here */
 
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
         ForgotPasswordModule,
         DashboardModule,
         DocumentsModule,
-        ConnectionsModule       
+        ConnectionsModule,
+        CategoriesModule       
     ],
     bootstrap   : [
         AppComponent
